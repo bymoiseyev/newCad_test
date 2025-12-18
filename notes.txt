@@ -1,0 +1,10 @@
+TODO:
+
+
+
+dont forget to add color to prio and maybe an "!" icon on high prio, and think about "status" shoudl it reall
+be green?
+
+just have "ej åtgärdad" regular gray adn åtgärdad green
+
+dont forget the liottle line "åtgärdda", cchange it when changeing filter
