@@ -8,3 +8,5 @@ be green?
 just have "ej åtgärdad" regular gray adn åtgärdad green
 
 dont forget the liottle line "åtgärdda", cchange it when changeing filter
+
+fix also the "åtgärdade" hover thing, jsut chnage the hover color on resolved

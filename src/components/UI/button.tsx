@@ -6,20 +6,17 @@ interface ButtonProps {
     children: ReactNode;
     className?: string;
     onClick?: () => void;
-    type?: "button" | "submit" | "reset";
 }
 
 const Button = ({
     children,
     className = '',
     onClick,
-    type = 'button',
 }: ButtonProps) => {
     return (
         <button
-            type={type}
             onClick={onClick}
-            className={`px-10 p-2 rounded-xs ${className}`}>
+            className={`px-10 p-2 rounded-xs cursor-pointer ${className}`}>
               {children}
         </button>
     )

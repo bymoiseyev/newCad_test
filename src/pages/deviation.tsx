@@ -6,13 +6,10 @@ import Button from "../components/UI/button";
 import { useState } from "react";
 import ConfirmationPopup from "../components/UI/confirmationPopup";
 
-
-
 const DeviationsPage = () => {
 
   const [statusFilter, setStatusFilter] = useState<DeviationStatus>("rejected");
   const [showConfirmation, setShowConfirmation] = useState(false);
-
 
   const [deviations, setDeviations] = useState<Deviation[]>(
     deviationsData as Deviation[]
@@ -52,7 +49,7 @@ const DeviationsPage = () => {
   };
 
   return (
-    <main className="m-5">
+    <main className="m-2 lg:m-5">
       {showConfirmation && <ConfirmationPopup />}
       <h1 className="text-5xl font-semibold">Avvikelser</h1>
 
@@ -60,33 +57,37 @@ const DeviationsPage = () => {
       <div className=" flex flex-col gap-6 my-6">
         <div className="space-y-3">
           <p className="text-neutral-500 text-sm">Filtrera avvikelser</p>
-          <div className=" flex justify-between">
-            <div className="space-x-5">
+          <div className=" flex justify-between max-lg:items-end">
+            <div className="lg:space-x-5 max-lg:space-y-2 max-lg:w-full">
               <Button
                 onClick={() => setStatusFilter("rejected")}
-                className={`cursor-pointer border border-neutral-300 ${statusFilter === "rejected"
+                className={`border border-neutral-300 max-lg:w-full ${statusFilter === "rejected"
                   ? "bg-neutral-200 text-neutral-900"
                   : "bg-white hover:bg-neutral-50"}`}>
-                Aktuell ({rejectedCount})
+                Aktuella ({rejectedCount})
               </Button>
               <Button
                 onClick={() => setStatusFilter("resolved")}
-                className={` cursor-pointer border border-neutral-300 ${statusFilter === "resolved"
+                className={`border border-neutral-300 max-lg:w-full ${statusFilter === "resolved"
                   ? "bg-neutral-200 text-neutral-900"
                   : "bg-white hover:bg-neutral-50"}`}>
                 Avslutade ({resolvedCount})
               </Button>
             </div>
-            <Button
-              onClick={() => alert('Filter button included to demonstrate UI layout')}
-              className=" border border-neutral-300" >
-              Filtrera ≡
-            </Button>
+            {/* <Button
+              onClick={() => alert('This does nothing! This sort button is included just to demonstrate UI layout')}
+              className=" border border-neutral-300 flex items-center h-fit gap-2 " >
+              <span className="hidden">
+                Sortera
+              </span>
+              <GoFilter />
+
+            </Button> */}
           </div>
         </div>
 
         <div className="flex items-center w-full gap-4">
-          <span className="text-sm text-neutral-500">Åtgärda</span>
+          <span className="text-sm text-neutral-500">Aktuella avvikelser</span>
           <hr className="flex-1 border-t border-neutral-300" />
         </div>
       </div>

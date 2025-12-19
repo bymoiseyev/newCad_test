@@ -6,6 +6,7 @@ interface PrimaryProps {
     deviation: Deviation
 }
 
+
 const Secondary = ({ deviation }: PrimaryProps) => {
 
     // Makes the displayed status labels clearer
@@ -33,60 +34,66 @@ const Secondary = ({ deviation }: PrimaryProps) => {
         high: 'text-red-500',
     }
 
-    return (
-        <div className='bg-[#F9FAFB]  border border-t-0 border-neutral-300  p-7 space-y-7'>
+    // Reusable text styles
+    const text = {
+        label: "text-sm text-neutral-500",
+        value: "text-base lg:text-[15.5px] font-semibold ",
+        meta: "text-sm text-neutral-500",
+    };
 
+    return (
+        <div className='bg-neutral-100  lg:bg-[#F9FAFB]  border border-t-0 max-lg:border-b-0 border-neutral-300 p-3 lg:p-7 space-y-10 lg:space-y-7 '>
+            {/* <hr className=' opacity-15 block lg:hidden' /> */}
             {/* ROW 1 */}
             <div>
-                <dt className='text-base text-neutral-500'>Fastighet</dt>
-                <dd className='font-semibold text-[15.5px]'>{deviation.propertyName}</dd>
+                <dt className={text.label}>Fastighet</dt>
+                <dd className={text.value}>{deviation.propertyName}</dd>
             </div>
 
             {/* ROW 2 */}
-            <div className='flex gap-10'>
+            <div className='flex max-lg:flex-col max-lg:gap-2 gap-10'>
                 <div>
-                    <dt className='text-base text-neutral-500'>Byggnad</dt>
-                    <dd className='font-semibold text-[15.5px]'>{deviation.buildingName}</dd>
+                    <dt className={text.label}>Byggnad</dt>
+                    <dd className={text.value}>{deviation.buildingName}</dd>
                 </div>
 
                 <div>
-                    <dt className='text-base text-neutral-500'>Våningsplan</dt>
-                    <dd className='font-semibold text-[15.5px]'>{deviation.levelName}</dd>
+                    <dt className={text.label}>Våningsplan</dt>
+                    <dd className={text.value}>{deviation.levelName}</dd>
                 </div>
 
                 <div>
-                    <dt className='text-base text-neutral-500'>Rum</dt>
-                    <dd className='font-semibold text-[15.5px]'>{deviation.roomName}</dd>
+                    <dt className={text.label}>Rum</dt>
+                    <dd className={text.value}>{deviation.roomName}</dd>
                 </div>
             </div>
 
             {/* ROW 3 */}
             <div>
-                <dt className='text-base text-neutral-500'>Objekt</dt>
-                <dd className='font-semibold text-[15.5px]'>{deviation.objectName}</dd>
+                <dt className={text.label}>Objekt</dt>
+                <dd className={text.value}>{deviation.objectName}</dd>
             </div>
 
             {/* ROW 4 */}
-            <div className='flex gap-10'>
+            <div className='flex max-lg:flex-col max-lg:gap-2 gap-10'>
                 <div>
-                    <dt className='text-base text-neutral-500'>Prioritet</dt>
-                    <dd
-                        className={`font-semibold text-[15.5px] ${priorityColors[deviation.priority]}`}>
+                    <dt className={text.label}>Prioritet</dt>
+                    <dd className={`${text.value} ${priorityColors[deviation.priority]}`}>
                         {priorityLabels[deviation.priority]}
                     </dd>
                 </div>
 
                 <div>
-                    <dt className='text-base text-neutral-500'>Status</dt>
-                    <dd className={`font-semibold ${statusColors[deviation.status]} text-[15.5px]`}>{statusLabels[deviation.status]}</dd>
+                    <dt className={text.label}>Status</dt>
+                    <dd className={`${text.value} ${statusColors[deviation.status]} `}>{statusLabels[deviation.status]}</dd>
                 </div>
 
                 <div>
-                    <dt className='text-base text-neutral-500'>Ansvarig</dt>
-                    <dd className='font-semibold text-[15.5px]'>{deviation.responsibleUser ?? 'Ej tilldelad'}</dd>
+                    <dt className={text.label}>Ansvarig</dt>
+                    <dd className={text.value}>{deviation.responsibleUser ?? 'Ej tilldelad'}</dd>
                 </div>
             </div>
-            <span className='text-[15.5px] text-neutral-500'>Senast uppdatrerad: {new Date(deviation.updatedAtUtc).toLocaleDateString('sv-SE')}</span>
+            <span className={text.label}>Senast uppdatrerad: {new Date(deviation.updatedAtUtc).toLocaleDateString('sv-SE')}</span>
 
         </div>
     )
