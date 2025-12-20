@@ -1,10 +1,14 @@
 // src\components\secondary.tsx
+import { RiErrorWarningFill } from 'react-icons/ri'
 import type { Deviation, Priority } from '../types/deviation'
 
 
 interface PrimaryProps {
     deviation: Deviation
 }
+
+
+// This dropdown displays the secondary information.
 
 
 const Secondary = ({ deviation }: PrimaryProps) => {
@@ -42,57 +46,64 @@ const Secondary = ({ deviation }: PrimaryProps) => {
     };
 
     return (
-        <div className='bg-neutral-100  lg:bg-[#F9FAFB]  border border-t-0 max-lg:border-b-0 border-neutral-300 p-3 lg:p-7 space-y-10 lg:space-y-7 '>
+        <div className='bg-neutral-100  lg:bg-[#F9FAFB]  border border-t-0 max-lg:border-b-0 border-neutral-300 p-3 lg:p-7 space-y-10  lg:space-y-7 '>
             {/* <hr className=' opacity-15 block lg:hidden' /> */}
             {/* ROW 1 */}
-            <div>
+            <hr className=' border-neutral-300' />
+
+            <dl>
                 <dt className={text.label}>Fastighet</dt>
                 <dd className={text.value}>{deviation.propertyName}</dd>
-            </div>
+            </dl>
 
             {/* ROW 2 */}
-            <div className='flex max-lg:flex-col max-lg:gap-2 gap-10'>
-                <div>
+            <div className='flex max-lg:flex-col max-lg:gap-4 gap-10'>
+
+                <dl>
                     <dt className={text.label}>Byggnad</dt>
                     <dd className={text.value}>{deviation.buildingName}</dd>
-                </div>
+                </dl>
 
-                <div>
+                <dl>
                     <dt className={text.label}>Våningsplan</dt>
                     <dd className={text.value}>{deviation.levelName}</dd>
-                </div>
+                </dl>
 
-                <div>
+                <dl>
                     <dt className={text.label}>Rum</dt>
                     <dd className={text.value}>{deviation.roomName}</dd>
-                </div>
+                </dl>
             </div>
-
+            <hr className=' border-neutral-300' />
             {/* ROW 3 */}
-            <div>
-                <dt className={text.label}>Objekt</dt>
+            <dl>
+                <dt className={text.label}>Objektnamn</dt>
                 <dd className={text.value}>{deviation.objectName}</dd>
-            </div>
-
+            </dl>
+            <hr className=' border-neutral-300' />
             {/* ROW 4 */}
             <div className='flex max-lg:flex-col max-lg:gap-2 gap-10'>
-                <div>
+                <dl>
                     <dt className={text.label}>Prioritet</dt>
-                    <dd className={`${text.value} ${priorityColors[deviation.priority]}`}>
+                    <dd className={`flex items-center gap-1 ${text.value} ${priorityColors[deviation.priority]}`}>
+                        {deviation.priority === "high" && (
+                            <RiErrorWarningFill className="text-red-500" />
+                        )}
                         {priorityLabels[deviation.priority]}
                     </dd>
-                </div>
+                </dl>
 
-                <div>
+                <dl>
                     <dt className={text.label}>Status</dt>
                     <dd className={`${text.value} ${statusColors[deviation.status]} `}>{statusLabels[deviation.status]}</dd>
-                </div>
+                </dl>
 
-                <div>
+                <dl>
                     <dt className={text.label}>Ansvarig</dt>
                     <dd className={text.value}>{deviation.responsibleUser ?? 'Ej tilldelad'}</dd>
-                </div>
+                </dl>
             </div>
+            <hr className=' border-neutral-300' />
             <span className={text.label}>Senast uppdatrerad: {new Date(deviation.updatedAtUtc).toLocaleDateString('sv-SE')}</span>
 
         </div>

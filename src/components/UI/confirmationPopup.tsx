@@ -1,5 +1,7 @@
 import { FiCheck } from "react-icons/fi"
 
+// A confirmation popup rendered inside /deviations.tsx briefly 
+// appears for 800 ms to confirm the action was successful.
 
 const ConfirmationPopup = () => {
     return (

@@ -8,6 +8,7 @@ import Button from './UI/button'
 import { BiUndo } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi"
 import { FaChevronDown } from "react-icons/fa6";
+import { RiErrorWarningFill } from "react-icons/ri";
 
 
 // Primary clickable card
@@ -44,14 +45,13 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
     }
     return (
         <article>
-            {/*☢️☢️☢️ For ux clarity add darker bg on selected card */}
             <div
                 onClick={() => {
                     setIsDropdownOpen(!isDropdownOpen);
                 }}
                 className={`lg:h-25 flex items-center justify-between border max-lg:border-b-0 lg:border-l-0 border-neutral-200 max-lg:p-2 bg-neutral-100  cursor-pointer 
                 ${deviation.status === "resolved" ? 'bg-neutral-200' : ''}
-                ${isDropdownOpen ? "lg:bg-neutral-200" : "hover:bg-neutral-50"}`}>
+                ${isDropdownOpen ? "lg:bg-neutral-200" : "hover:bg-neutral-200"}`}>
                 <header className='flex max-lg:flex-col max-lg:w-full max-lg:justify-between lg:items-center max-lg:min-h-40 gap-5 max-lg:bg-white'>
                     <span className={` lg:h-25 h-2 w-full lg:w-2 ${deviation.status === "resolved" ? 'bg-neutral-400' : priorityColors[deviation.priority]}`} />
                     {/* FUTURE IMAGE PLACEHOLDER */}
@@ -62,7 +62,13 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
                         <FaChevronDown className={` transition-transform lg:hidden mr-3 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`} />
                     </div>
                     <div className='p-2'>
-                        <h3 className='text-lg lg:text-xl max-lg:font-semibold'>{deviation.name}</h3>
+                        <div className='flex lg:items-center gap-2'>
+                            <h3 className='text-lg lg:text-xl max-lg:font-semibold'>{deviation.name}</h3>
+                            {deviation.priority === "high" && (
+                                <RiErrorWarningFill className="text-red-500 text-xl lg:text-lg shrink-0 mt-1" />
+                            )}
+
+                        </div>
                         <p className='text-neutral-500 text-sm'>{deviation.buildingName} • {deviation.roomName} </p>
                     </div>
                 </header>
@@ -101,18 +107,16 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
             }
 
             {/* 📱 MOBILE: Resolve button for mobile */}
-            <div className="flex lg:hidden gap-5 rounded-xs  border border-t-0 bg-neutral-100 border-neutral-200 p-2">
+            <div className="flex  items-center lg:hidden gap-5 rounded-xs  border border-t-0 bg-neutral-100 border-neutral-200 p-2">
                 {deviation.status === "resolved" ? (
                     <>
                         <button
                             onClick={onUndo}
-                            className="w-10 h-10 cursor-pointer bg-red-500 hover:bg-red-600 text-white flex justify-center items-center ">
+                            className="flex-1 lg:w-10 h-10 cursor-pointer bg-red-500 hover:bg-red-600 text-white flex justify-center items-center ">
                             <BiUndo />
                         </button>
-
-
                         <Button
-                            className=" flex items-center gap-2 text-green-600 cursor-default font-semibold mr-5">
+                            className=" flex flex-1 justify-center items-center gap-2 bg-neutral-200 text-green-600 cursor-default font-semibold">
                             Åtgärdad <FiCheck />
                         </Button>
                     </>

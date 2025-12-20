@@ -6,20 +6,24 @@ import Button from "../components/UI/button";
 import { useState } from "react";
 import ConfirmationPopup from "../components/UI/confirmationPopup";
 
+// Main file where everything is rendered.
+
 const DeviationsPage = () => {
 
   const [statusFilter, setStatusFilter] = useState<DeviationStatus>("rejected");
   const [showConfirmation, setShowConfirmation] = useState(false);
 
+
+  // The deviations
   const [deviations, setDeviations] = useState<Deviation[]>(
     deviationsData as Deviation[]
   );
 
-  // To keep track of the resolved and rejected
+  // To keep track of the resolved and rejected in the filter buttons e.g "Aktuella (4)"
   const rejectedCount = deviations.filter(d => d.status === "rejected").length;
   const resolvedCount = deviations.filter(d => d.status === "resolved").length;
 
-  // Simple filtering logic by, rejected - resolved
+  // Simple filtering logic by, rejected & resolved
   const filteredDeviations = deviations.filter(
     deviation => deviation.status === statusFilter
   );
@@ -31,9 +35,10 @@ const DeviationsPage = () => {
         d.id === id ? { ...d, status: "resolved" } : d
       )
     );
+
     // Displays a short confirmation after resolving a deviation   
     setShowConfirmation(true);
-
+    // Remove after 800ms
     setTimeout(() => {
       setShowConfirmation(false);
     }, 800);
@@ -74,20 +79,15 @@ const DeviationsPage = () => {
                 Avslutade ({resolvedCount})
               </Button>
             </div>
-            {/* <Button
-              onClick={() => alert('This does nothing! This sort button is included just to demonstrate UI layout')}
-              className=" border border-neutral-300 flex items-center h-fit gap-2 " >
-              <span className="hidden">
-                Sortera
-              </span>
-              <GoFilter />
-
-            </Button> */}
           </div>
         </div>
 
         <div className="flex items-center w-full gap-4">
-          <span className="text-sm text-neutral-500">Aktuella avvikelser</span>
+          <span className="text-sm text-neutral-500">
+            {statusFilter === "rejected"
+              ? "Aktuella avvikelser"
+              : "Avslutade avvikelser"}
+          </span>
           <hr className="flex-1 border-t border-neutral-300" />
         </div>
       </div>
