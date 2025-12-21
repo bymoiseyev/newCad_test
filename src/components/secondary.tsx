@@ -2,19 +2,16 @@
 import { RiErrorWarningFill } from 'react-icons/ri'
 import type { Deviation, Priority } from '../types/deviation'
 
-
-interface PrimaryProps {
+interface SecondaryProps {
     deviation: Deviation
 }
 
-
 // This dropdown displays the secondary information.
 
+const Secondary = ({ deviation }: SecondaryProps) => {
 
-const Secondary = ({ deviation }: PrimaryProps) => {
-
-    // Makes the displayed status labels clearer
-    const priorityLabels = {
+    // Makes the displayed priority labels clearer
+    const priorityLabels: Record<Priority, string> = {
         low: 'Låg',
         medium: 'Mellan',
         high: 'Hög',
@@ -25,7 +22,7 @@ const Secondary = ({ deviation }: PrimaryProps) => {
         rejected: 'Ej åtgärdad',
         resolved: 'Åtgärdad',
     }
-
+    // Additional status (Ej åtgärdad - Åtgärdad) clarity
     const statusColors: Record<Deviation["status"], string> = {
         rejected: "text-black",
         resolved: "text-green-500",
@@ -47,28 +44,22 @@ const Secondary = ({ deviation }: PrimaryProps) => {
 
     return (
         <div className='bg-neutral-100  lg:bg-[#F9FAFB]  border border-t-0 max-lg:border-b-0 border-neutral-300 p-3 lg:p-7 space-y-10  lg:space-y-7 '>
-            {/* <hr className=' opacity-15 block lg:hidden' /> */}
             {/* ROW 1 */}
             <hr className=' border-neutral-300' />
-
             <dl>
                 <dt className={text.label}>Fastighet</dt>
                 <dd className={text.value}>{deviation.propertyName}</dd>
             </dl>
-
             {/* ROW 2 */}
             <div className='flex max-lg:flex-col max-lg:gap-4 gap-10'>
-
                 <dl>
                     <dt className={text.label}>Byggnad</dt>
                     <dd className={text.value}>{deviation.buildingName}</dd>
                 </dl>
-
                 <dl>
                     <dt className={text.label}>Våningsplan</dt>
                     <dd className={text.value}>{deviation.levelName}</dd>
                 </dl>
-
                 <dl>
                     <dt className={text.label}>Rum</dt>
                     <dd className={text.value}>{deviation.roomName}</dd>
@@ -92,20 +83,17 @@ const Secondary = ({ deviation }: PrimaryProps) => {
                         {priorityLabels[deviation.priority]}
                     </dd>
                 </dl>
-
                 <dl>
                     <dt className={text.label}>Status</dt>
                     <dd className={`${text.value} ${statusColors[deviation.status]} `}>{statusLabels[deviation.status]}</dd>
                 </dl>
-
                 <dl>
                     <dt className={text.label}>Ansvarig</dt>
                     <dd className={text.value}>{deviation.responsibleUser ?? 'Ej tilldelad'}</dd>
                 </dl>
             </div>
             <hr className=' border-neutral-300' />
-            <span className={text.label}>Senast uppdatrerad: {new Date(deviation.updatedAtUtc).toLocaleDateString('sv-SE')}</span>
-
+            <span className={text.label}>Senast uppdaterad: {new Date(deviation.updatedAtUtc).toLocaleDateString('sv-SE')}</span>
         </div>
     )
 }

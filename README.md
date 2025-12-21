@@ -1,5 +1,7 @@
 # Frontend Test
 
+**Obs:** UX-designvalen är gjorda utifrån min egen uppfattning av hur denna typ av lista används och hanteras. Om lösningen skulle gå till produktion skulle mer kontext behövas, till exempel vilka användare som arbetar med listan, hur den används i praktiken (till exempel om den fungerar som en snabb att-göra-lista eller om avvikelser hanteras en i taget), hur lång listan normalt är, och andra liknande faktorer som kan påverka designbesluten.
+
 ## Setup
 npm install  
 npm run dev  

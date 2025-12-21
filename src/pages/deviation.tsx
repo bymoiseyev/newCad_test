@@ -6,7 +6,7 @@ import Button from "../components/UI/button";
 import { useState } from "react";
 import ConfirmationPopup from "../components/UI/confirmationPopup";
 
-// Main file where everything is rendered.
+// Main page
 
 const DeviationsPage = () => {
 

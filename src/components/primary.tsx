@@ -10,11 +10,9 @@ import { FiCheck } from "react-icons/fi"
 import { FaChevronDown } from "react-icons/fa6";
 import { RiErrorWarningFill } from "react-icons/ri";
 
-
 // Primary clickable card
 // Shows core info and main action
 // name, buildingName, roomName, status, priority
-
 
 interface PrimaryProps {
     deviation: Deviation
@@ -22,20 +20,9 @@ interface PrimaryProps {
     onUndo: () => void;
 }
 
-
-
-
-
-
 const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
 
-
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-
-
-
-
-
 
     // Adding color to priority
     const priorityColors: Record<Priority, string> = {
@@ -43,6 +30,7 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
         medium: 'bg-amber-500',
         high: 'bg-red-500',
     }
+
     return (
         <article>
             <div
@@ -57,7 +45,7 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
                     {/* FUTURE IMAGE PLACEHOLDER */}
                     <div className=' flex items-center justify-between mx-2'>
                         <div className=' w-14 h-14  max-lg:bg-neutral-100/50  flex items-center justify-center'>
-                            <img className=' w-10 h-auto ' src={deviation.objectIcon?.url} alt='' />
+                            <img className=' w-10 h-auto ' src={deviation.objectIcon?.url} alt={deviation.objectName} />
                         </div>
                         <FaChevronDown className={` transition-transform lg:hidden mr-3 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`} />
                     </div>
@@ -67,7 +55,6 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
                             {deviation.priority === "high" && (
                                 <RiErrorWarningFill className="text-red-500 text-xl lg:text-lg shrink-0 mt-1" />
                             )}
-
                         </div>
                         <p className='text-neutral-500 text-sm'>{deviation.buildingName} • {deviation.roomName} </p>
                     </div>
@@ -82,8 +69,6 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
                                 className="w-10 h-10 cursor-pointer bg-red-500 hover:bg-red-600 text-white flex justify-center items-center ">
                                 <BiUndo />
                             </button>
-
-
                             <Button
                                 className=" flex items-center gap-2 text-green-600 cursor-default font-semibold mr-5">
                                 Åtgärdad <FiCheck />
@@ -92,8 +77,7 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
                     ) : (
                         <Button
                             onClick={onResolve}
-                            className="bg-newCad-blue hover:bg-newCad-blue/90 active:bg-newCad-blue/80  text-white mr-5"
-                        >
+                            className="bg-newCad-blue hover:bg-newCad-blue/90 active:bg-newCad-blue/80  text-white mr-5">
                             Åtgärda
                         </Button>
                     )}
@@ -105,7 +89,6 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
                     key={deviation.id}
                     deviation={deviation} />
             }
-
             {/* 📱 MOBILE: Resolve button for mobile */}
             <div className="flex  items-center lg:hidden gap-5 rounded-xs  border border-t-0 bg-neutral-100 border-neutral-200 p-2">
                 {deviation.status === "resolved" ? (
@@ -132,7 +115,6 @@ const Primary = ({ deviation, onResolve, onUndo }: PrimaryProps) => {
         </article>
     )
 }
-
 
 export default Primary
 
